@@ -48,7 +48,7 @@ class pdf2text {
 	 * @param <string> $fieldname - Name of field whose value is required
 	 */
 	public function getValue($fieldname) {
-		$tmp_fields = "/home/www/ssl/oiscweb/files/uploads/tmp_pdf2text_fields.txt";
+		$tmp_fields = "tmp_pdf2text_fields.txt";
 		$p = exec("pdftk $this->filename dump_data_fields > $tmp_fields");
 		$subject = file_get_contents($tmp_fields);
 		unlink($tmp_fields);
@@ -62,7 +62,7 @@ class pdf2text {
 	}
 	
 	protected function pdftotext($filename){
-		$tmp_text = "/home/www/ssl/oiscweb/files/uploads/tmp_pdf2text.txt";
+		$tmp_text = "tmp_pdf2text.txt";
 		$o = exec("pdftotext -raw -eol unix -enc Latin1 \"" . $filename . "\" \"" . $tmp_text . "\"");
 		$c = file_get_contents($tmp_text);
 		unlink($tmp_text);
@@ -76,7 +76,7 @@ class pdf2text {
 	 * Returns all data as an associative array of key-value pairs. NULL for empty field
 	 */	
 	public function makeArray() {
-		$tmp_fields = "/home/www/ssl/oiscweb/files/uploads/tmp_pdf2text_fields_ar.txt";
+		$tmp_fields = "tmp_pdf2text_fields_ar.txt";
 		$p = exec("pdftk $this->filename dump_data_fields > $tmp_fields");
 		$data = array();
 		$key = NULL;
@@ -104,7 +104,7 @@ class pdf2text {
 	 * Returns all FieldNames in a 1D array.
 	 */
 	public function listFields () {
-		$tmp_fields = "/home/www/ssl/oiscweb/files/fieldData/insp-up/tmp_pdf2text_fields_list.txt";
+		$tmp_fields = "tmp_pdf2text_fields_list.txt";
 		$p = exec("pdftk $this->filename dump_data_fields > $tmp_fields");
 		$keys = array();
 		foreach(file($tmp_fields) as $line) {
